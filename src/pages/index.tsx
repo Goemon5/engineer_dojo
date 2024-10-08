@@ -2,6 +2,7 @@ import Image from "next/image";
 import localFont from "next/font/local";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Layout from "@/components/Layout ";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -17,11 +18,10 @@ const geistMono = localFont({
 export default function Home() {
   return (
     <div>
-      <Header />
-
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <Footer />
-      </footer>
+      <Layout>
+        <h1>Welcome to Some Page</h1>
+        <p>This is the content of the page.</p>
+      </Layout>
     </div>
   );
 }
