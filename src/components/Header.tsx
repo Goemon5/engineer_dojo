@@ -20,7 +20,7 @@ interface HeaderProps {}
  */
 const Header = ({}: HeaderProps): JSX.Element => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div>
       <nav className="w-full max-w-full bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700 mt-5">
         <div className="max-w-screen-xl flex items-center justify-between mx-auto p-4">
           備蓄パーフェクトサイト
