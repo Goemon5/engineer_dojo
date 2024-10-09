@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import Layout from "@/components/layout/Layout ";
-import FamilyInput from "@/components/family_input";
+import FamilyInput from "@/components/FamilyInput";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
