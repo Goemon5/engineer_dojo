@@ -1,8 +1,9 @@
 import Image from "next/image";
 import localFont from "next/font/local";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import Layout from "@/components/Layout ";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import Layout from "@/components/layout/Layout ";
+import FamilyInput from "@/components/FamilyInput";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -20,6 +21,7 @@ export default function Home() {
     <div>
       <Layout>
         <h1>Welcome to Some Page</h1>
+        <FamilyInput />
         <p>This is the content of the page.</p>
       </Layout>
     </div>
