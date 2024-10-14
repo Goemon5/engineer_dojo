@@ -23,7 +23,7 @@ const Header = ({}: HeaderProps): JSX.Element => {
     <div>
       <nav className="w-full max-w-full bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700 mt-5">
         <div className="max-w-screen-xl flex items-center justify-between mx-auto p-4">
-          備蓄パーフェクトサイト
+          エンジニア道場
           <div className="flex items-center space-x-4">
             <div className="flex items-center">
               <input
