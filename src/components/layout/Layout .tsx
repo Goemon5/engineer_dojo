@@ -10,7 +10,9 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className={`flex flex-col items-center justify-center p-24 `}>
+      <main
+        className={`flex flex-col items-center justify-start min-h-[700px]`}
+      >
         {children}
       </main>
 
