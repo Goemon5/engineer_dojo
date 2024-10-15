@@ -1,5 +1,6 @@
 import Layout from "@/components/layout/Layout ";
 import styles from "../styles/pages/index.module.css";
+import CategoryTabs from "@/components/CategoryTabs";
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
               あなたの学び方に合わせた学習方法を見つけよう
             </p>
           </div>
+          <CategoryTabs />
         </div>
       </Layout>
     </div>
