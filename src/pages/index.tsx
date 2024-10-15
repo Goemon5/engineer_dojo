@@ -1,28 +1,25 @@
-import Image from "next/image";
-import localFont from "next/font/local";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 import Layout from "@/components/layout/Layout ";
-import FamilyInput from "@/components/FamilyInput";
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+import styles from "../styles/pages/index.module.css";
 
 export default function Home() {
   return (
     <div>
       <Layout>
-        <h1>Welcome to Some Page</h1>
-        <FamilyInput />
-        <p>This is the content of the page.</p>
+        <div>
+          <img
+            src="/images/実験.jpg"
+            className={styles.productDetailTopLeftImage} // CSS Modulesのクラスを適用
+          />
+
+          <div className="p-[20px]">
+            <h1 className="text-left font-bold text-[30px] ml-3px">
+              エンジニアの「学び方」がわかる
+            </h1>
+            <p className="text-left text-[20px] mt-8px color: #6a6f73;">
+              あなたの学び方に合わせた学習方法を見つけよう
+            </p>
+          </div>
+        </div>
       </Layout>
     </div>
   );
