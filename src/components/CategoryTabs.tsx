@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ArticleCard from "./ArticleCard";
-import styles from "@/styles/ArticleCard.module.css";
+import styles from "@/styles/CategoryTabs.module.css";
 
 const categories = [
   "IT資格",
@@ -63,26 +63,28 @@ const CategoryTabs = () => {
   );
 
   return (
-    <div className={styles.categoryTabs}>
-      {categories.map((category) => (
-        <button
-          key={category}
-          className={category === selectedCategory ? "active" : ""}
-          onClick={() => setSelectedCategory(category)}
-        >
-          {category}
-        </button>
-      ))}
-
-      {/* 選択されたカテゴリに基づく記事の表示 */}
-      <div className={styles.cardsContainer}>
-        {articles[selectedCategory].map((article, index) => (
-          <ArticleCard
-            key={index}
-            title={article.title}
-            description={article.description}
-          />
+    <div>
+      <div className={styles.categoryTabs}>
+        {categories.map((category) => (
+          <button
+            key={category}
+            className={category === selectedCategory ? "active" : ""}
+            onClick={() => setSelectedCategory(category)}
+          >
+            {category}
+          </button>
         ))}
+
+        {/* 選択されたカテゴリに基づく記事の表示 */}
+        <div className={styles.cardsContainer}>
+          {articles[selectedCategory].map((article, index) => (
+            <ArticleCard
+              key={index}
+              title={article.title}
+              description={article.description}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
