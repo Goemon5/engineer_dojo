@@ -25,3 +25,43 @@ body {
     text-wrap: balance;
   }
 }
+
+.category-tabs,
+.filter-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.category-tabs button.active,
+.filter-buttons button.active {
+  background-color: #0073e6;
+  color: white;
+}
+
+.course-list {
+  display: flex;
+  gap: 20px;
+}
+
+.course-card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+}
+
+.course-card img {
+  width: 100%;
+  height: auto;
+}
+
+.course-info {
+  margin-top: 10px;
+}
+
+.course-label {
+  background-color: gold;
+  color: black;
+  padding: 5px;
+  border-radius: 5px;
+  font-weight: bold;
+}
