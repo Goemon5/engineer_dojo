@@ -23,7 +23,6 @@
   transition: all 0.3s ease;
 }
 
-.categoryTabs button:hover,
 .categoryTabs button.active {
   font-weight: bold; /* Highlight active category */
   border-bottom: 2px solid #000; /* Add underline to active category */
