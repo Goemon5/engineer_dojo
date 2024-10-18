@@ -74,6 +74,7 @@ const CategoryTabs = () => {
             {category}
           </button>
         ))}
+        <div className={styles.line}></div>
 
         {/* 選択されたカテゴリに基づく記事の表示 */}
         <div className={styles.cardsContainer}>
