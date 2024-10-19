@@ -159,21 +159,26 @@ const CategoryTabs = () => {
         {/* 選択されたカテゴリに基づく記事の表示 */}
         <div className={styles.cardsContainer}>
           <p>スクール</p>
-          {articles[selectedCategory].school.map((article, index) => (
-            <ArticleCard
-              key={index}
-              title={article.title}
-              description={article.description}
-            />
-          ))}
+          <div className={styles.cardsRow}>
+            {articles[selectedCategory].school.map((article, index) => (
+              <ArticleCard
+                key={index}
+                title={article.title}
+                description={article.description}
+              />
+            ))}
+          </div>
+
           <p>udemy</p>
-          {articles[selectedCategory].udemy.map((article, index) => (
-            <ArticleCard
-              key={index}
-              title={article.title}
-              description={article.description}
-            />
-          ))}
+          <div className={styles.cardsRow}>
+            {articles[selectedCategory].udemy.map((article, index) => (
+              <ArticleCard
+                key={index}
+                title={article.title}
+                description={article.description}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
