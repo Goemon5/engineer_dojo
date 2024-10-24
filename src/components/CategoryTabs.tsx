@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ArticleCard from "./ArticleCard";
 import styles from "@/styles/CategoryTabs.module.css";
+import SubcategoryTabs from "./SubcategoryTabs";
 
 const categories = [
   "IT資格",
@@ -10,6 +11,16 @@ const categories = [
   "Microsoft",
   "3D・アニメーション",
 ];
+
+const subcategories: { [key: string]: string[] } = {
+  IT資格: ["初級", "中級", "上級"],
+  データサイエンス: ["基礎", "応用", "専門"],
+  プログラミング言語: ["JavaScript", "Python", "その他"],
+  ウェブ開発: ["フロントエンド", "バックエンド", "フルスタック"],
+  Microsoft: ["Excel", "PowerPoint", "Word"],
+  "3D・アニメーション": ["モデリング", "アニメーション", "レンダリング"],
+};
+
 interface Article {
   title: string;
   description: string;
@@ -141,6 +152,14 @@ const CategoryTabs = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>(
     categories[0]
   );
+  const [selectedSubcategory, setSelectedSubcategory] = useState<string>(
+    subcategories[categories[0]][0]
+  );
+
+  const handleCategorySelect = (category: string) => {
+    setSelectedCategory(category);
+    setSelectedSubcategory(subcategories[category][0]);
+  };
 
   return (
     <div>
@@ -155,6 +174,12 @@ const CategoryTabs = () => {
           </button>
         ))}
         <div className={styles.line}></div>
+        {/* サブカテゴリタブ */}
+        <SubcategoryTabs
+          subcategories={subcategories[selectedCategory]}
+          selectedSubcategory={selectedSubcategory}
+          onSelect={(subcategory) => setSelectedSubcategory(subcategory)}
+        />
 
         {/* 選択されたカテゴリに基づく記事の表示 */}
         <div className={styles.cardsContainer}>
