@@ -41,8 +41,9 @@ const RakutenItemSearch: React.FC = () => {
   return (
     <div>
       <h1>Search Results for "typescript"</h1>
+      {/*
       <ul>
-        {items.map((item, index) => (
+      {items.map((item, index) => (
           <li key={index}>
             <a
               href={item.Item.itemUrl}
@@ -56,8 +57,8 @@ const RakutenItemSearch: React.FC = () => {
               <p>{item.Item.itemName}</p>
             </a>
           </li>
-        ))}
-      </ul>
+      ))}
+      </ul>*/}
     </div>
   );
 };
