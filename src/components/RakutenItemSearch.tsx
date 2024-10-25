@@ -11,9 +11,13 @@ interface Item {
 }
 interface RakutenItemSearchProps {
   category: string;
+  subcategory: string;
 }
 
-const RakutenItemSearch: React.FC<RakutenItemSearchProps> = ({ category }) => {
+const RakutenItemSearch: React.FC<RakutenItemSearchProps> = ({
+  category,
+  subcategory,
+}) => {
   const [items, setItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -24,9 +28,10 @@ const RakutenItemSearch: React.FC<RakutenItemSearchProps> = ({ category }) => {
         "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20220601";
       const APPLICATION_ID = "";
       const AFFILIATE_ID = "412ba417.480adb3f.412ba418.b4dfc510";
+      const searchKeyword = `${category} ${subcategory}`;
 
       const response = await fetch(
-        `${API_URL}?applicationId=${APPLICATION_ID}&affiliateId=${AFFILIATE_ID}&keyword=${keyword}&hits=10`
+        `${API_URL}?applicationId=${APPLICATION_ID}&affiliateId=${AFFILIATE_ID}&keyword=${searchKeyword}&hits=10`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch items");
@@ -50,14 +55,16 @@ const RakutenItemSearch: React.FC<RakutenItemSearchProps> = ({ category }) => {
 
   useEffect(() => {
     fetchRakutenItems(category);
-  }, [category]);
+  }, [category, subcategory]);
   if (loading) {
     return <p>Loading...</p>;
   }
 
   return (
     <div>
-      <h1>Search Results for "{category}"</h1>
+      <h1>
+        Search Results for "{category}" - "{subcategory}"
+      </h1>
       <ul>
         {items && items.length > 0 ? (
           items.map((item, index) => (
