@@ -147,8 +147,10 @@ const articles: { [key: string]: CategoryArticles } = {
     ],
   },
 };
-
-const CategoryTabs = () => {
+interface CategoryTabsProps {
+  onCategoryChange: (category: string) => void;
+}
+const CategoryTabs: React.FC<CategoryTabsProps> = ({ onCategoryChange }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>(
     categories[0]
   );
@@ -168,7 +170,10 @@ const CategoryTabs = () => {
           <button
             key={category}
             className={category === selectedCategory ? styles.active : ""}
-            onClick={() => setSelectedCategory(category)}
+            onClick={() => {
+              onCategoryChange(category);
+              setSelectedCategory(category);
+            }}
           >
             {category}
           </button>

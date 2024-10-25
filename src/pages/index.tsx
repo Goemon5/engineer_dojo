@@ -2,8 +2,15 @@ import Layout from "@/components/layout/Layout ";
 import styles from "../styles/pages/index.module.css";
 import CategoryTabs from "@/components/CategoryTabs";
 import RakutenItemSearch from "@/components/RakutenItemSearch";
+import React, { useState } from "react";
 
-export default function Home() {
+const HomePage: React.FC = () => {
+  const [selectedCategory, setSelectedCategory] =
+    useState<string>("typescript");
+
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category);
+  };
   return (
     <div>
       <Layout>
@@ -21,11 +28,13 @@ export default function Home() {
               あなたの学び方に合わせた学習方法を見つけよう
             </p>
           </div>
-          <CategoryTabs />
+          <CategoryTabs onCategoryChange={handleCategoryChange} />
 
-          <RakutenItemSearch />
+          {/* 選択されたカテゴリに基づくアイテム検索結果を表示 */}
+          <RakutenItemSearch category={selectedCategory} />
         </div>
       </Layout>
     </div>
   );
-}
+};
+export default HomePage;
