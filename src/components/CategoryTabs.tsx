@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ArticleCard from "./ArticleCard";
 import styles from "@/styles/CategoryTabs.module.css";
+import SubcategoryTabs from "./SubcategoryTabs";
 
 const categories = [
   "IT資格",
@@ -10,6 +11,16 @@ const categories = [
   "Microsoft",
   "3D・アニメーション",
 ];
+
+const subcategories: { [key: string]: string[] } = {
+  IT資格: ["初級", "中級", "上級"],
+  データサイエンス: ["基礎", "応用", "専門"],
+  プログラミング言語: ["JavaScript", "Python", "その他"],
+  ウェブ開発: ["フロントエンド", "バックエンド", "フルスタック"],
+  Microsoft: ["Excel", "PowerPoint", "Word"],
+  "3D・アニメーション": ["モデリング", "アニメーション", "レンダリング"],
+};
+
 interface Article {
   title: string;
   description: string;
@@ -136,11 +147,21 @@ const articles: { [key: string]: CategoryArticles } = {
     ],
   },
 };
-
-const CategoryTabs = () => {
+interface CategoryTabsProps {
+  onCategoryChange: (category: string) => void;
+}
+const CategoryTabs: React.FC<CategoryTabsProps> = ({ onCategoryChange }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>(
     categories[0]
   );
+  const [selectedSubcategory, setSelectedSubcategory] = useState<string>(
+    subcategories[categories[0]][0]
+  );
+
+  const handleCategorySelect = (category: string) => {
+    setSelectedCategory(category);
+    setSelectedSubcategory(subcategories[category][0]);
+  };
 
   return (
     <div>
@@ -149,37 +170,18 @@ const CategoryTabs = () => {
           <button
             key={category}
             className={category === selectedCategory ? styles.active : ""}
-            onClick={() => setSelectedCategory(category)}
+            onClick={() => {
+              onCategoryChange(category);
+              setSelectedCategory(category);
+            }}
           >
             {category}
           </button>
         ))}
         <div className={styles.line}></div>
+        {/* サブカテゴリタブ */}
 
         {/* 選択されたカテゴリに基づく記事の表示 */}
-        <div className={styles.cardsContainer}>
-          <p>スクール</p>
-          <div className={styles.cardsRow}>
-            {articles[selectedCategory].school.map((article, index) => (
-              <ArticleCard
-                key={index}
-                title={article.title}
-                description={article.description}
-              />
-            ))}
-          </div>
-
-          <p>udemy</p>
-          <div className={styles.cardsRow}>
-            {articles[selectedCategory].udemy.map((article, index) => (
-              <ArticleCard
-                key={index}
-                title={article.title}
-                description={article.description}
-              />
-            ))}
-          </div>
-        </div>
       </div>
     </div>
   );
