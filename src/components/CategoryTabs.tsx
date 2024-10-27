@@ -180,36 +180,8 @@ const CategoryTabs: React.FC<CategoryTabsProps> = ({ onCategoryChange }) => {
         ))}
         <div className={styles.line}></div>
         {/* サブカテゴリタブ */}
-        <SubcategoryTabs
-          subcategories={subcategories[selectedCategory]}
-          selectedSubcategory={selectedSubcategory}
-          onSelect={(subcategory) => setSelectedSubcategory(subcategory)}
-        />
 
         {/* 選択されたカテゴリに基づく記事の表示 */}
-        <div className={styles.cardsContainer}>
-          <p>スクール</p>
-          <div className={styles.cardsRow}>
-            {articles[selectedCategory].school.map((article, index) => (
-              <ArticleCard
-                key={index}
-                title={article.title}
-                description={article.description}
-              />
-            ))}
-          </div>
-
-          <p>udemy</p>
-          <div className={styles.cardsRow}>
-            {articles[selectedCategory].udemy.map((article, index) => (
-              <ArticleCard
-                key={index}
-                title={article.title}
-                description={article.description}
-              />
-            ))}
-          </div>
-        </div>
       </div>
     </div>
   );

@@ -26,9 +26,9 @@ const RakutenItemSearch: React.FC<RakutenItemSearchProps> = ({
     try {
       const API_URL =
         "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20220601";
-      const APPLICATION_ID = "";
+      const APPLICATION_ID = "1005462778123973141";
       const AFFILIATE_ID = "412ba417.480adb3f.412ba418.b4dfc510";
-      const searchKeyword = `${category} ${subcategory}`;
+      const searchKeyword = ` ${subcategory} `;
 
       const response = await fetch(
         `${API_URL}?applicationId=${APPLICATION_ID}&affiliateId=${AFFILIATE_ID}&keyword=${searchKeyword}&hits=10`
