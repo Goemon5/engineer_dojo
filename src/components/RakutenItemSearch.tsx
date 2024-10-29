@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import ArticleCard from "./ArticleCard";
+import styles from "@/styles/ArticleCard.module.css";
 
 interface Item {
   Item: {
@@ -65,23 +67,18 @@ const RakutenItemSearch: React.FC<RakutenItemSearchProps> = ({
       <h1>
         Search Results for "{category}" - "{subcategory}"
       </h1>
-      <ul>
+      <ul className={styles.resultsList}>
         {items && items.length > 0 ? (
           items.map((item, index) => (
             <li key={index}>
-              <a
-                href={item.Item.itemUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  src={
-                    item.Item.mediumImageUrls[0]?.imageUrl || "/fallback.jpg"
-                  }
-                  alt={item.Item.itemName}
-                />
-                <p>{item.Item.itemName}</p>
-              </a>
+              <ArticleCard
+                title={item.Item.itemName}
+                description="Description not available" // Replace with a real description if available
+                imageUrl={
+                  item.Item.mediumImageUrls[0]?.imageUrl || "/fallback.jpg"
+                }
+                url={item.Item.itemUrl}
+              />
             </li>
           ))
         ) : (
