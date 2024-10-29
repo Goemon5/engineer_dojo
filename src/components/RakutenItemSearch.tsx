@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import ArticleCard from "./ArticleCard";
+import styles from "@/styles/ArticleCard.module.css";
 
 interface Item {
   Item: {
@@ -26,9 +28,9 @@ const RakutenItemSearch: React.FC<RakutenItemSearchProps> = ({
     try {
       const API_URL =
         "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20220601";
-      const APPLICATION_ID = "1005462778123973141";
+      const APPLICATION_ID = "";
       const AFFILIATE_ID = "412ba417.480adb3f.412ba418.b4dfc510";
-      const searchKeyword = ` ${subcategory} `;
+      const searchKeyword = `${category} ${subcategory}`;
 
       const response = await fetch(
         `${API_URL}?applicationId=${APPLICATION_ID}&affiliateId=${AFFILIATE_ID}&keyword=${searchKeyword}&hits=10`
@@ -65,23 +67,18 @@ const RakutenItemSearch: React.FC<RakutenItemSearchProps> = ({
       <h1>
         Search Results for "{category}" - "{subcategory}"
       </h1>
-      <ul>
+      <ul className={styles.resultsList}>
         {items && items.length > 0 ? (
           items.map((item, index) => (
             <li key={index}>
-              <a
-                href={item.Item.itemUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  src={
-                    item.Item.mediumImageUrls[0]?.imageUrl || "/fallback.jpg"
-                  }
-                  alt={item.Item.itemName}
-                />
-                <p>{item.Item.itemName}</p>
-              </a>
+              <ArticleCard
+                title={item.Item.itemName}
+                description="Description not available" // Replace with a real description if available
+                imageUrl={
+                  item.Item.mediumImageUrls[0]?.imageUrl || "/fallback.jpg"
+                }
+                url={item.Item.itemUrl}
+              />
             </li>
           ))
         ) : (
