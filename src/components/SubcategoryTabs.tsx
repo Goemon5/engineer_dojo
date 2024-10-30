@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "@/styles/CategoryTabs.module.css";
+import styles from "@/styles/SubcategoryTabs.module.css";
 
 interface SubcategoryTabsProps {
   subcategories: string[];
