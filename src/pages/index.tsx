@@ -3,6 +3,7 @@ import styles from "../styles/pages/index.module.css";
 import CategoryTabs from "@/components/CategoryTabs";
 import RakutenItemSearch from "@/components/RakutenItemSearch";
 import SubcategoryTabs from "@/components/SubcategoryTabs";
+
 import React, { useState } from "react";
 
 const categories = [
@@ -47,7 +48,6 @@ const HomePage: React.FC = () => {
             src="/images/実験.jpg"
             className={styles.productDetailTopLeftImage} // CSS Modulesのクラスを適用
           />
-
           <div className="p-[20px]">
             <h1 className="text-left font-bold text-[30px] ml-3px">
               エンジニアの「学び方」がわかる
@@ -56,13 +56,12 @@ const HomePage: React.FC = () => {
               あなたの学び方に合わせた学習方法を見つけよう
             </p>
           </div>
-          <CategoryTabs onCategoryChange={handleCategoryChange} />
+          <CategoryTabs onCategoryChange={handleCategoryChange} />{" "}
           <SubcategoryTabs
             subcategories={subcategories[selectedCategory]}
             selectedSubcategory={selectedSubcategory}
             onSelect={handleSubcategoryChange}
           />
-
           {/* 選択されたカテゴリに基づくアイテム検索結果を表示 */}
           <RakutenItemSearch
             category={selectedCategory}
