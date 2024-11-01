@@ -35,7 +35,7 @@ const RakutenItemSearch: React.FC<RakutenItemSearchProps> = ({
       const searchKeyword = `${subcategory}`;
 
       const response = await fetch(
-        `${API_URL}?applicationId=${APPLICATION_ID}&affiliateId=${AFFILIATE_ID}&keyword=${searchKeyword}&hits=10`
+        `${API_URL}?applicationId=${APPLICATION_ID}&affiliateId=${AFFILIATE_ID}&keyword=${searchKeyword}&hits=20`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch items");
@@ -81,38 +81,41 @@ const RakutenItemSearch: React.FC<RakutenItemSearchProps> = ({
       <h1>
         Search Results for "{category}" - "{subcategory}"
       </h1>
-      <ul className={styles.itemList}>
-        {items && items.length > 0 ? (
-          items.slice(index, index + itemsPerPage).map((item, idx) => (
-            <li key={idx} className={styles.listItem}>
-              <ArticleCard
-                title={item.Item.itemName}
-                description="Description not available" // Replace with a real description if available
-                imageUrl={
-                  item.Item.mediumImageUrls[0]?.imageUrl || "/fallback.jpg"
-                }
-                url={item.Item.itemUrl}
-              />
-            </li>
-          ))
-        ) : (
-          <p>No items found.</p>
-        )}
-      </ul>
-      <button
-        onClick={handlePrev}
-        disabled={index === 0}
-        className={styles.navButton}
-      >
-        &#10094;
-      </button>
-      <button
-        onClick={handleNext}
-        disabled={index + itemsPerPage >= items.length}
-        className={styles.navButton}
-      >
-        &#10095;
-      </button>
+      <div className={styles.cardList}>
+        <div className={styles.navButtons}>
+          {index > 0 && (
+            <button onClick={handlePrev} className={styles.navButton}>
+              &#10094;
+            </button>
+          )}
+        </div>
+        <ul className={styles.itemList}>
+          {items && items.length > 0 ? (
+            items.slice(index, index + itemsPerPage).map((item, idx) => (
+              <li key={idx} className={styles.listItem}>
+                <ArticleCard
+                  title={item.Item.itemName}
+                  description="Description not available" // Replace with a real description if available
+                  imageUrl={
+                    item.Item.mediumImageUrls[0]?.imageUrl || "/fallback.jpg"
+                  }
+                  url={item.Item.itemUrl}
+                />
+              </li>
+            ))
+          ) : (
+            <p>No items found.</p>
+          )}
+        </ul>
+
+        <div className={styles.navButtons}>
+          {index + itemsPerPage < items.length && (
+            <button onClick={handleNext} className={styles.navButton}>
+              &#10095;
+            </button>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
