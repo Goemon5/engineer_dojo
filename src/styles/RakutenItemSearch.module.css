@@ -1,3 +1,8 @@
+.cardList {
+  display: flex;
+  flex-direction: row;
+}
+
 .itemList {
   display: flex;
   flex-direction: row;
@@ -8,4 +13,28 @@
 }
 .listItem {
   margin: 0;
+}
+/* RakutenItemSearch.module.css */
+.navButtons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.navButton {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
