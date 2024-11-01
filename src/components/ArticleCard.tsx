@@ -17,6 +17,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
   <div className={styles.card}>
     <a href={url} target="_blank" rel="noopener noreferrer">
       <img src={imageUrl} alt={title} />
+
       <h3>{title}</h3>
       <p>{description}</p>
     </a>
