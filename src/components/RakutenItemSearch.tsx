@@ -23,7 +23,7 @@ const RakutenItemSearch: React.FC<RakutenItemSearchProps> = ({
   const [items, setItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [index, setIndex] = useState(0);
-  const itemsPerPage = 4; // 一度に表示するアイテム数
+  const itemsPerPage = 5; // 一度に表示するアイテム数
 
   const fetchRakutenItems = async (keyword: string) => {
     setLoading(true);
