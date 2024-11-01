@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ArticleCard from "./ArticleCard";
-import styles from "@/styles/ArticleCard.module.css";
+import styles from "@/styles/RakutenItemSearch.module.css";
 
 interface Item {
   Item: {
@@ -22,13 +22,15 @@ const RakutenItemSearch: React.FC<RakutenItemSearchProps> = ({
 }) => {
   const [items, setItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [index, setIndex] = useState(0);
+  const itemsPerPage = 4; // 一度に表示するアイテム数
 
   const fetchRakutenItems = async (keyword: string) => {
     setLoading(true);
     try {
       const API_URL =
         "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20220601";
-      const APPLICATION_ID = "";
+      const APPLICATION_ID = "1005462778123973141";
       const AFFILIATE_ID = "412ba417.480adb3f.412ba418.b4dfc510";
       const searchKeyword = `${subcategory}`;
 
@@ -61,16 +63,28 @@ const RakutenItemSearch: React.FC<RakutenItemSearchProps> = ({
   if (loading) {
     return <p>Loading...</p>;
   }
+  const handleNext = () => {
+    if (index + itemsPerPage < items.length) {
+      setIndex(index + itemsPerPage);
+    }
+  };
+
+  // 前のセットに戻る関数
+  const handlePrev = () => {
+    if (index - itemsPerPage >= 0) {
+      setIndex(index - itemsPerPage);
+    }
+  };
 
   return (
     <div>
       <h1>
         Search Results for "{category}" - "{subcategory}"
       </h1>
-      <ul className={styles.resultsList}>
+      <ul className={styles.itemList}>
         {items && items.length > 0 ? (
-          items.map((item, index) => (
-            <li key={index}>
+          items.slice(index, index + itemsPerPage).map((item, idx) => (
+            <li key={idx} className={styles.listItem}>
               <ArticleCard
                 title={item.Item.itemName}
                 description="Description not available" // Replace with a real description if available
@@ -85,6 +99,20 @@ const RakutenItemSearch: React.FC<RakutenItemSearchProps> = ({
           <p>No items found.</p>
         )}
       </ul>
+      <button
+        onClick={handlePrev}
+        disabled={index === 0}
+        className={styles.navButton}
+      >
+        &#10094;
+      </button>
+      <button
+        onClick={handleNext}
+        disabled={index + itemsPerPage >= items.length}
+        className={styles.navButton}
+      >
+        &#10095;
+      </button>
     </div>
   );
 };
