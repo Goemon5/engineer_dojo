@@ -95,7 +95,7 @@ const RakutenItemSearch: React.FC<RakutenItemSearchProps> = ({
               <li key={idx} className={styles.listItem}>
                 <ArticleCard
                   title={item.Item.itemName}
-                  description="Description not available" // Replace with a real description if available
+                  description="" // Replace with a real description if available
                   imageUrl={
                     item.Item.mediumImageUrls[0]?.imageUrl || "/fallback.jpg"
                   }
