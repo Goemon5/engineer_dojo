@@ -1,0 +1,28 @@
+.subcategoryTabs {
+  display: flex;
+  gap: 16px; /* ボタン同士の間隔 */
+  margin-bottom: 20px; /* ボタン下部の余白 */
+  align-items: center; /* ボタンの縦方向の整列 */
+}
+
+.subcategoryTabs button {
+  background-color: #f2f4f7; /* 非アクティブ時の背景色 */
+  color: #333; /* 非アクティブ時の文字色 */
+  border: none; /* ボタンの境界線を削除 */
+  cursor: pointer;
+  font-size: 1rem; /* ボタンの文字サイズ */
+  padding: 10px 20px; /* ボタンの余白（上下左右） */
+  border-radius: 25px; /* ボタンの角を丸める */
+  transition: all 0.3s ease; /* スムーズなホバー効果 */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* 軽い影を追加 */
+}
+
+.subcategoryTabs button:hover {
+  background-color: #e8eaed; /* ホバー時の背景色 */
+}
+
+.subcategoryTabs button.active {
+  font-weight: bold; /* アクティブボタンを強調 */
+  background-color: black; /* アクティブ時の背景色 */
+  color: white; /* アクティブ時の文字色 */
+}

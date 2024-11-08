@@ -3,13 +3,14 @@ import styles from "../styles/pages/index.module.css";
 import CategoryTabs from "@/components/CategoryTabs";
 import RakutenItemSearch from "@/components/RakutenItemSearch";
 import SubcategoryTabs from "@/components/SubcategoryTabs";
+
 import React, { useState } from "react";
 
 const categories = [
   "IT資格",
   "データサイエンス",
   "プログラミング言語",
-  "ウェブ開発",
+  "Web開発",
   "Microsoft",
   "3D・アニメーション",
 ];
@@ -18,7 +19,7 @@ const subcategories: { [key: string]: string[] } = {
   IT資格: ["基本情報技術者試験", "応用技術者試験", "上級"],
   データサイエンス: ["基礎", "応用", "専門"],
   プログラミング言語: ["JavaScript", "Python", "その他"],
-  ウェブ開発: ["フロントエンド", "バックエンド", "フルスタック"],
+  Web開発: ["フロントエンド", "バックエンド", "フルスタック"],
   Microsoft: ["Excel", "PowerPoint", "Word"],
   "3D・アニメーション": ["モデリング", "アニメーション", "レンダリング"],
 };
@@ -47,7 +48,6 @@ const HomePage: React.FC = () => {
             src="/images/実験.jpg"
             className={styles.productDetailTopLeftImage} // CSS Modulesのクラスを適用
           />
-
           <div className="p-[20px]">
             <h1 className="text-left font-bold text-[30px] ml-3px">
               エンジニアの「学び方」がわかる
@@ -56,18 +56,19 @@ const HomePage: React.FC = () => {
               あなたの学び方に合わせた学習方法を見つけよう
             </p>
           </div>
-          <CategoryTabs onCategoryChange={handleCategoryChange} />
-          <SubcategoryTabs
-            subcategories={subcategories[selectedCategory]}
-            selectedSubcategory={selectedSubcategory}
-            onSelect={handleSubcategoryChange}
-          />
-
-          {/* 選択されたカテゴリに基づくアイテム検索結果を表示 */}
-          <RakutenItemSearch
-            category={selectedCategory}
-            subcategory={selectedSubcategory}
-          />
+          <CategoryTabs onCategoryChange={handleCategoryChange} />{" "}
+          <div className="bg-customGray p-6 rounded-lg">
+            <SubcategoryTabs
+              subcategories={subcategories[selectedCategory]}
+              selectedSubcategory={selectedSubcategory}
+              onSelect={handleSubcategoryChange}
+            />
+            {/* 選択されたカテゴリに基づくアイテム検索結果を表示 */}
+            <RakutenItemSearch
+              category={selectedCategory}
+              subcategory={selectedSubcategory}
+            />
+          </div>
         </div>
       </Layout>
     </div>
