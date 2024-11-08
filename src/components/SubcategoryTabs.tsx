@@ -23,7 +23,6 @@ const SubcategoryTabs: React.FC<SubcategoryTabsProps> = ({
           {subcategory}
         </button>
       ))}
-      <div className={styles.line}></div>
     </div>
   );
 };

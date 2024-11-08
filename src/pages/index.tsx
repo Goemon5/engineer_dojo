@@ -10,7 +10,7 @@ const categories = [
   "IT資格",
   "データサイエンス",
   "プログラミング言語",
-  "ウェブ開発",
+  "Web開発",
   "Microsoft",
   "3D・アニメーション",
 ];
@@ -19,7 +19,7 @@ const subcategories: { [key: string]: string[] } = {
   IT資格: ["基本情報技術者試験", "応用技術者試験", "上級"],
   データサイエンス: ["基礎", "応用", "専門"],
   プログラミング言語: ["JavaScript", "Python", "その他"],
-  ウェブ開発: ["フロントエンド", "バックエンド", "フルスタック"],
+  Web開発: ["フロントエンド", "バックエンド", "フルスタック"],
   Microsoft: ["Excel", "PowerPoint", "Word"],
   "3D・アニメーション": ["モデリング", "アニメーション", "レンダリング"],
 };
@@ -57,16 +57,18 @@ const HomePage: React.FC = () => {
             </p>
           </div>
           <CategoryTabs onCategoryChange={handleCategoryChange} />{" "}
-          <SubcategoryTabs
-            subcategories={subcategories[selectedCategory]}
-            selectedSubcategory={selectedSubcategory}
-            onSelect={handleSubcategoryChange}
-          />
-          {/* 選択されたカテゴリに基づくアイテム検索結果を表示 */}
-          <RakutenItemSearch
-            category={selectedCategory}
-            subcategory={selectedSubcategory}
-          />
+          <div className="bg-customGray p-6 rounded-lg">
+            <SubcategoryTabs
+              subcategories={subcategories[selectedCategory]}
+              selectedSubcategory={selectedSubcategory}
+              onSelect={handleSubcategoryChange}
+            />
+            {/* 選択されたカテゴリに基づくアイテム検索結果を表示 */}
+            <RakutenItemSearch
+              category={selectedCategory}
+              subcategory={selectedSubcategory}
+            />
+          </div>
         </div>
       </Layout>
     </div>
