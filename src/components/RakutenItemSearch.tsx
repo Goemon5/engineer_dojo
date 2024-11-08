@@ -30,9 +30,10 @@ const RakutenItemSearch: React.FC<RakutenItemSearchProps> = ({
     try {
       const API_URL =
         "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20220601";
-      const APPLICATION_ID = "1005462778123973141";
+      const APPLICATION_ID = "";
       const AFFILIATE_ID = "412ba417.480adb3f.412ba418.b4dfc510";
-      const searchKeyword = `${subcategory}`;
+      const searchKeywordParts = [category, subcategory].filter(Boolean);
+      const searchKeyword = searchKeywordParts.join(" ");
 
       const response = await fetch(
         `${API_URL}?applicationId=${APPLICATION_ID}&affiliateId=${AFFILIATE_ID}&keyword=${searchKeyword}&hits=20`
@@ -41,6 +42,7 @@ const RakutenItemSearch: React.FC<RakutenItemSearchProps> = ({
         throw new Error("Failed to fetch items");
       }
       const data = await response.json();
+
       const sortedItems = data.Items.sort((a: Item, b: Item) => {
         // まず「評価」でソートし、同じ評価の場合は「レビュー数」でソート
         if (b.Item.reviewAverage === a.Item.reviewAverage) {
@@ -49,6 +51,7 @@ const RakutenItemSearch: React.FC<RakutenItemSearchProps> = ({
         return b.Item.reviewAverage - a.Item.reviewAverage;
       });
       setItems(sortedItems || []);
+      console.log(searchKeyword);
     } catch (error) {
       console.error("Error fetching Rakuten items:", error);
       setItems([]);
