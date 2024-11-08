@@ -11,6 +11,7 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        customGray: "#f7f9fa", // 他の名前で追加する場合
       },
     },
   },
