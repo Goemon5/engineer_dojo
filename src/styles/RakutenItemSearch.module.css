@@ -11,14 +11,13 @@
   margin: 0;
   list-style: none;
 }
-.listItem {
-  margin: 0;
-}
+
 /* RakutenItemSearch.module.css */
 .navButtons {
   display: flex;
   justify-content: space-between;
-  margin-top: 100px;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .navButton {
