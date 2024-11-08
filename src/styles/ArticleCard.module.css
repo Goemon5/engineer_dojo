@@ -18,11 +18,22 @@
 .card img {
   display: block;
   margin: 0 auto 10px; /* 上下センター寄せ */
+  max-height: 114px;
+  max-width: 128px;
 }
 
 .card h3 {
   margin: 0 0 10px 0;
   font-size: 16px;
+
+  /* Multi-line truncation with ellipsis */
+  display: -webkit-box; /* Required for multi-line support */
+  -webkit-box-orient: vertical; /* Required for vertical layout */
+  overflow: hidden; /* Hide overflow */
+  text-overflow: ellipsis; /* Add ellipsis at overflow */
+  -webkit-line-clamp: 3; /* Limit text to 3 lines */
+  line-height: 1.5; /* Adjust as needed (3 lines = 4.5em total height) */
+  max-height: 80px; /* Ensure the container height matches 3 lines */
 }
 
 .card p {
