@@ -57,16 +57,18 @@ const HomePage: React.FC = () => {
             </p>
           </div>
           <CategoryTabs onCategoryChange={handleCategoryChange} />{" "}
-          <SubcategoryTabs
-            subcategories={subcategories[selectedCategory]}
-            selectedSubcategory={selectedSubcategory}
-            onSelect={handleSubcategoryChange}
-          />
-          {/* 選択されたカテゴリに基づくアイテム検索結果を表示 */}
-          <RakutenItemSearch
-            category={selectedCategory}
-            subcategory={selectedSubcategory}
-          />
+          <div className="bg-customGray p-6 rounded-lg">
+            <SubcategoryTabs
+              subcategories={subcategories[selectedCategory]}
+              selectedSubcategory={selectedSubcategory}
+              onSelect={handleSubcategoryChange}
+            />
+            {/* 選択されたカテゴリに基づくアイテム検索結果を表示 */}
+            <RakutenItemSearch
+              category={selectedCategory}
+              subcategory={selectedSubcategory}
+            />
+          </div>
         </div>
       </Layout>
     </div>
