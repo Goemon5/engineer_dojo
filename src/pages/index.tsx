@@ -3,7 +3,7 @@ import styles from "../styles/pages/index.module.css";
 import CategoryTabs from "@/components/CategoryTabs";
 import RakutenItemSearch from "@/components/RakutenItemSearch";
 import SubcategoryTabs from "@/components/SubcategoryTabs";
-
+import GetQiitaArticle from "@/components/GetQiitaArticle";
 import React, { useState } from "react";
 
 const categories = [
@@ -68,6 +68,7 @@ const HomePage: React.FC = () => {
               category={selectedCategory}
               subcategory={selectedSubcategory}
             />
+            <GetQiitaArticle />
           </div>
         </div>
       </Layout>
