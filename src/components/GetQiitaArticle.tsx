@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ArticleCard from "./ArticleCard";
 
 const QiitaArticles: React.FC = () => {
   const [articles, setArticles] = useState<any[]>([]);
@@ -34,15 +35,16 @@ const QiitaArticles: React.FC = () => {
   return (
     <div>
       <h1>Qiita Articles</h1>
-      {articles.map((article) => (
-        <div key={article.id}>
-          <h2>{article.title}</h2>
-          <p>{article.body.substring(0, 100)}...</p>
-          <a href={article.url} target="_blank" rel="noopener noreferrer">
-            Read more
-          </a>
-        </div>
-      ))}
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
+        {articles.map((article) => (
+          <ArticleCard
+            key={article.id}
+            title={article.title}
+            description={article.body.substring(0, 50)} // 100文字まで表示
+            url={article.url}
+          />
+        ))}
+      </div>
     </div>
   );
 };
