@@ -1,18 +1,31 @@
 import React, { useState, useEffect } from "react";
 import ArticleCard from "./ArticleCard";
 
-const QiitaArticles: React.FC = () => {
+interface QiitaArticlProps {
+  category: string;
+  subcategory: string;
+}
+
+const QiitaArticles: React.FC<QiitaArticlProps> = ({
+  category,
+  subcategory,
+}) => {
   const [articles, setArticles] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const response = await fetch("https://qiita.com/api/v2/items", {
-          headers: {
-            Authorization: "", // アクセストークンをここに設定
-          },
-        });
+        const searchKeywordParts = [category, subcategory].filter(Boolean);
+        const searchKeyword = searchKeywordParts.join(" ");
+        const response = await fetch(
+          `https://qiita.com/api/v2/items?query=${searchKeyword}`,
+          {
+            headers: {
+              Authorization: "", // アクセストークンをここに設定
+            },
+          }
+        );
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -26,7 +39,7 @@ const QiitaArticles: React.FC = () => {
     };
 
     fetchArticles();
-  }, []);
+  }, [category, subcategory]);
 
   if (error) {
     return <div>Error: {error}</div>;
