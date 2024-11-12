@@ -13,6 +13,9 @@ const config: Config = {
         foreground: "var(--foreground)",
         customGray: "#f7f9fa", // 他の名前で追加する場合
       },
+      maxWidth: {
+        pc: "1500px", // カスタムクラスとして 'pc' を追加
+      },
     },
   },
   plugins: [],
