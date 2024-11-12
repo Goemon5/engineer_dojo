@@ -8,7 +8,7 @@ type LayoutProps = {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col lg:max-w-pc">
       <Header />
       <main
         className={`flex flex-col items-center justify-start min-h-[700px]`}

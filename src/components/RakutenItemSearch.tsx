@@ -18,6 +18,7 @@ const RakutenItemSearch: React.FC<RakutenItemSearchProps> = ({
   subcategory,
 }) => {
   const [items, setItems] = useState<Item[]>([]);
+
   const [loading, setLoading] = useState<boolean>(true);
   const [index, setIndex] = useState(0);
   const itemsPerPage = 5; // 一度に表示するアイテム数
@@ -97,7 +98,7 @@ const RakutenItemSearch: React.FC<RakutenItemSearchProps> = ({
         </ul>
 
         <div className={styles.navButtons}>
-          {index + itemsPerPage < items.length && (
+          {index + itemsPerPage < (items?.length ?? 0) && (
             <button onClick={handleNext} className={styles.navButton}>
               &#10095;
             </button>
