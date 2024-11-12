@@ -3,14 +3,11 @@ import ArticleCard from "./ArticleCard";
 import styles from "@/styles/RakutenItemSearch.module.css";
 
 interface Item {
-  Item: {
-    itemName: string;
-    itemUrl: string;
-    mediumImageUrls: { imageUrl: string }[];
-    reviewCount: number; // レビュー数
-    reviewAverage: number;
-  };
+  itemName: string;
+  itemUrl: string;
+  mediumImageUrls: { imageUrl: string }[];
 }
+
 interface RakutenItemSearchProps {
   category: string;
   subcategory: string;
@@ -25,33 +22,21 @@ const RakutenItemSearch: React.FC<RakutenItemSearchProps> = ({
   const [index, setIndex] = useState(0);
   const itemsPerPage = 5; // 一度に表示するアイテム数
 
-  const fetchRakutenItems = async (keyword: string) => {
+  const fetchRakutenItems = async (category: string, subcategory: string) => {
     setLoading(true);
     try {
-      const API_URL =
-        "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20220601";
-      const APPLICATION_ID = "";
-      const AFFILIATE_ID = "412ba417.480adb3f.412ba418.b4dfc510";
-      const searchKeywordParts = [category, subcategory].filter(Boolean);
-      const searchKeyword = searchKeywordParts.join(" ");
-
       const response = await fetch(
-        `${API_URL}?applicationId=${APPLICATION_ID}&affiliateId=${AFFILIATE_ID}&keyword=${searchKeyword}&hits=20`
+        `/api/rakuten-items?category=${encodeURIComponent(
+          category
+        )}&subcategory=${encodeURIComponent(subcategory)}`
       );
+
       if (!response.ok) {
         throw new Error("Failed to fetch items");
       }
       const data = await response.json();
-
-      const sortedItems = data.Items.sort((a: Item, b: Item) => {
-        // まず「評価」でソートし、同じ評価の場合は「レビュー数」でソート
-        if (b.Item.reviewAverage === a.Item.reviewAverage) {
-          return b.Item.reviewCount - a.Item.reviewCount;
-        }
-        return b.Item.reviewAverage - a.Item.reviewAverage;
-      });
-      setItems(sortedItems || []);
-      console.log(searchKeyword);
+      setItems(data);
+      console.log("Fetched items:", items);
     } catch (error) {
       console.error("Error fetching Rakuten items:", error);
       setItems([]);
@@ -61,7 +46,7 @@ const RakutenItemSearch: React.FC<RakutenItemSearchProps> = ({
   };
 
   useEffect(() => {
-    fetchRakutenItems(category);
+    fetchRakutenItems(category, subcategory);
   }, [category, subcategory]);
   if (loading) {
     return <p>Loading...</p>;
@@ -97,12 +82,12 @@ const RakutenItemSearch: React.FC<RakutenItemSearchProps> = ({
             items.slice(index, index + itemsPerPage).map((item, idx) => (
               <li key={idx} className={styles.listItem}>
                 <ArticleCard
-                  title={item.Item.itemName}
+                  title={item.itemName || "No title available"}
                   description="" // Replace with a real description if available
                   imageUrl={
-                    item.Item.mediumImageUrls[0]?.imageUrl || "/fallback.jpg"
+                    item.mediumImageUrls[0]?.imageUrl || "/fallback.jpg"
                   }
-                  url={item.Item.itemUrl}
+                  url={item.itemUrl}
                 />
               </li>
             ))
