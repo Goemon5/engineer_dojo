@@ -45,8 +45,8 @@ const HomePage: React.FC = () => {
       <Layout>
         <div>
           <img
-            src="/images/実験.jpg"
-            className={styles.productDetailTopLeftImage} // CSS Modulesのクラスを適用
+            src="/images/仮表紙.jpg"
+            className="w-full h-auto object-cover"
           />
           <div className="p-[20px]">
             <h1 className="text-left font-bold text-[30px] ml-3px">
