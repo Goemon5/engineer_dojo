@@ -68,10 +68,7 @@ const HomePage: React.FC = () => {
               category={selectedCategory}
               subcategory={selectedSubcategory}
             />
-            <GetQiitaArticle
-              category={selectedCategory}
-              subcategory={selectedSubcategory}
-            />
+            <GetQiitaArticle subcategory={selectedSubcategory} />
           </div>
         </div>
       </Layout>
