@@ -50,7 +50,7 @@ const HomePage: React.FC = () => {
           />
           <div className="p-[20px]">
             <h1 className="text-left font-bold text-[30px] ml-3px">
-              エンジニアの「学び方」がわかる
+              エンジニアの「学ぶ手段」を見つけよう
             </h1>
             <p className="text-left text-[20px] mt-8px color: #6a6f73;">
               あなたの学び方に合わせた学習方法を見つけよう
