@@ -5,6 +5,7 @@ import RakutenItemSearch from "@/components/RakutenItemSearch";
 import SubcategoryTabs from "@/components/SubcategoryTabs";
 import GetQiitaArticle from "@/components/GetQiitaArticle";
 import React, { useState } from "react";
+import Simulation from "@/components/Simulation";
 
 const categories = [
   "IT資格",
@@ -56,6 +57,7 @@ const HomePage: React.FC = () => {
               あなたの学び方に合わせた学習方法を見つけよう
             </p>
           </div>
+          <Simulation />
           <CategoryTabs onCategoryChange={handleCategoryChange} />{" "}
           <div className="bg-customGray p-6 rounded-lg">
             <SubcategoryTabs
