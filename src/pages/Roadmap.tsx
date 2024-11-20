@@ -5,6 +5,7 @@ import Layout from "@/components/layout/Layout ";
 import Simulation from "@/components/Simulation";
 import Image from "next/image";
 import Road from "/Users/takeuchidaiki/engineer_dojo/public/images/roadmap.jpg";
+import PersonalMap from "@/components/PersonalMap";
 
 interface Props {}
 
@@ -24,6 +25,7 @@ const RoadMap: React.FC = () => {
             </p>
           </div>
           <Simulation />
+          <PersonalMap />
         </div>
       </Layout>
     </div>
