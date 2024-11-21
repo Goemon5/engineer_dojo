@@ -49,13 +49,6 @@ const Simulation: React.FC = () => {
     }
   };
 
-  const scrollToSection = () => {
-    const section = document.getElementById("checklist-container");
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return (
     <div className="w-full p-8 rounded-lg shadow-md">
       <form className="space-y-6" onSubmit={handleSubmit}>
@@ -118,7 +111,6 @@ const Simulation: React.FC = () => {
           <button
             className="bg-orange-500 text-white px-6 py-2 rounded-md hover:bg-orange-600 transition duration-300"
             type="submit"
-            onClick={scrollToSection}
           >
             作成
           </button>
