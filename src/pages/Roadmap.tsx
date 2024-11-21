@@ -1,15 +1,43 @@
 import React from "react";
 import { useState } from "react";
-import Checklist from "@/components/CheckList";
+
 import Layout from "@/components/layout/Layout ";
 import Simulation from "@/components/Simulation";
 import Image from "next/image";
 import Road from "/Users/takeuchidaiki/engineer_dojo/public/images/roadmap.jpg";
 import PersonalMap from "@/components/PersonalMap";
 
-interface Props {}
+interface RoadmapData {
+  steps: number;
+  description: string;
+}
 
 const RoadMap: React.FC = () => {
+  const [roadmapData, setRoadmapData] = useState<RoadmapData | null>(null);
+
+  // Simulationから呼ばれる関数
+  const handleGenerateRoadmap = async (formData: {
+    career: number;
+    position: number;
+    goal: number;
+  }) => {
+    try {
+      const response = await fetch("/api/generate-roadmap", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to generate roadmap");
+      }
+
+      const data = await response.json();
+      setRoadmapData(data); // 結果を保存
+    } catch (error) {
+      console.error("Error generating roadmap:", error);
+    }
+  };
   return (
     <div>
       <Layout>
@@ -24,8 +52,8 @@ const RoadMap: React.FC = () => {
               あなたの学び方に合わせた学習方法を見つけよう
             </p>
           </div>
-          <Simulation />
-          <PersonalMap />
+          <Simulation onGenerateRoadmap={handleGenerateRoadmap} />
+          <PersonalMap roadmapData={roadmapData} />
         </div>
       </Layout>
     </div>

@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import Checklist from "./Checklist";
 
 interface UserDetail {
   career: number;
-
   position: number;
   goal: number;
 }
 
-const Simulation: React.FC = () => {
+interface SimulationProps {
+  onGenerateRoadmap: (formData: UserDetail) => void;
+}
+
+const Simulation: React.FC<SimulationProps> = ({ onGenerateRoadmap }) => {
   const [userDetails, setUserDetails] = useState<UserDetail>({
     career: -1,
     position: -1,
@@ -26,6 +28,7 @@ const Simulation: React.FC = () => {
   };
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    onGenerateRoadmap(userDetails);
 
     console.log(JSON.stringify(userDetails));
 
