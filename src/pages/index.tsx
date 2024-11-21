@@ -5,7 +5,7 @@ import RakutenItemSearch from "@/components/RakutenItemSearch";
 import SubcategoryTabs from "@/components/SubcategoryTabs";
 import GetQiitaArticle from "@/components/GetQiitaArticle";
 import React, { useState } from "react";
-import Simulation from "@/components/Simulation";
+import Link from "next/link";
 
 const categories = [
   "IT資格",
@@ -57,7 +57,15 @@ const HomePage: React.FC = () => {
               あなたの学び方に合わせた学習方法を見つけよう
             </p>
           </div>
-          <Simulation />
+          {/* デザインを適用したLink */}
+          <div className="text-center mt-6">
+            <Link
+              href="/Roadmap"
+              className="inline-block bg-blue-500 text-white text-[18px] font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-blue-600 transition duration-300"
+            >
+              目標に合わせたロードマップを作成する
+            </Link>
+          </div>
           <CategoryTabs onCategoryChange={handleCategoryChange} />{" "}
           <div className="bg-customGray p-6 rounded-lg">
             <SubcategoryTabs
