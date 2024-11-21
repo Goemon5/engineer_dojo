@@ -38,6 +38,7 @@ const QiitaArticles: React.FC<QiitaArticlProps> = ({ subcategory }) => {
     };
 
     fetchArticles();
+    setIndex(0);
   }, [subcategory]);
   const handleNext = () => {
     if (index + itemsPerPage < articles.length) {

@@ -48,6 +48,7 @@ const RakutenItemSearch: React.FC<RakutenItemSearchProps> = ({
 
   useEffect(() => {
     fetchRakutenItems(category, subcategory);
+    setIndex(0);
   }, [category, subcategory]);
   if (loading) {
     return <p>Loading...</p>;
