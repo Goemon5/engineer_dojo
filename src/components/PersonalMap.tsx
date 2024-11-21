@@ -1,8 +1,18 @@
 import React from "react";
 
-interface Props {}
+interface RoadmapData {
+  description: string;
+  steps: number;
+}
 
-const PersonalMap = (props: Props) => {
+interface PersonalMapProps {
+  roadmapData: RoadmapData | null;
+}
+
+const PersonalMap: React.FC<PersonalMapProps> = ({ roadmapData }) => {
+  /*if (!roadmapData) {
+    return <p>ロードマップを生成してください。</p>;
+  }*/
   return (
     <div className="w-full mx-auto px-[30px] mt-[30px]">
       <div className="relative border-l-4 border-blue-500">
@@ -15,6 +25,10 @@ const PersonalMap = (props: Props) => {
               これはロードマップの最初のステップです。
             </p>
           </div>
+        </div>
+        <div>
+          {/* <h2>{roadmapData.description}さんのロードマップ</h2>*/}
+          <ul></ul>
         </div>
 
         {/* カード2 */}
