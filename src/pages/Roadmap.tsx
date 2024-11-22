@@ -22,7 +22,7 @@ const RoadMap: React.FC = () => {
     goal: number;
   }) => {
     try {
-      const response = await fetch("/api/generate-roadmap", {
+      const response = await fetch("/api/roadmap", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

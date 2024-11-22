@@ -10,9 +10,9 @@ interface PersonalMapProps {
 }
 
 const PersonalMap: React.FC<PersonalMapProps> = ({ roadmapData }) => {
-  /*if (!roadmapData) {
+  if (!roadmapData) {
     return <p>ロードマップを生成してください。</p>;
-  }*/
+  }
   return (
     <div className="w-full mx-auto px-[30px] mt-[30px]">
       <div className="relative border-l-4 border-blue-500">
@@ -27,7 +27,9 @@ const PersonalMap: React.FC<PersonalMapProps> = ({ roadmapData }) => {
           </div>
         </div>
         <div>
-          {/* <h2>{roadmapData.description}さんのロードマップ</h2>*/}
+          <h2>{roadmapData.description}さんのロードマップ</h2>
+          <p>ステップ数: {roadmapData.steps}</p>
+
           <ul></ul>
         </div>
 
