@@ -26,30 +26,10 @@ const Simulation: React.FC<SimulationProps> = ({ onGenerateRoadmap }) => {
       [key]: parseInt(e.target.value, 10),
     });
   };
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onGenerateRoadmap(userDetails);
-
     console.log(JSON.stringify(userDetails));
-
-    // データをAPIにPOST
-    try {
-      const response = await fetch("http://localhost:8080/simulated-items", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userDetails),
-      });
-
-      if (!response.ok) {
-        throw new Error("データの送信に失敗しました");
-      }
-
-      const result = await response.json();
-    } catch (error) {
-      console.error("エラーが発生しました:", error);
-    }
+    onGenerateRoadmap(userDetails); // RoadMapの関数を呼び出すだけ
   };
 
   return (
