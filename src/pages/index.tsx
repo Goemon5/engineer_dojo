@@ -6,7 +6,8 @@ import SubcategoryTabs from "@/components/category-tabs/SubcategoryTabs";
 import GetQiitaArticle from "@/components/get-items/GetQiitaArticle";
 import React, { useState } from "react";
 import Link from "next/link";
-
+import Image from "next/image";
+import Home from "/Users/takeuchidaiki/engineer_dojo/public/images/home.png";
 const categories = [
   "IT資格",
   "データサイエンス",
@@ -42,53 +43,44 @@ const HomePage: React.FC = () => {
     setSelectedSubcategory(subcategory);
   };
   return (
-    <div>
-      <Layout>
-        <div>
-          {/* 画像部分 */}
-          <img
-            src="/images/表紙.png"
-            className="w-full h-auto object-cover md:h-[400px]"
-            alt="表紙"
-          />
-          {/* テキスト部分 */}
-          <div className="p-4 md:p-8">
-            <h1 className="text-left font-bold text-[24px] md:text-[30px]">
-              エンジニアの「最適な学び方」を見つけよう
-            </h1>
-            <p className="text-left text-[16px] md:text-[20px] mt-2 text-gray-600">
-              あなたの目標に合わせたロードマップを作成しよう
-            </p>
-          </div>
-          {/* リンクボタン */}
-          <div className="text-center mb-8">
-            <Link
-              href="/Roadmap"
-              className="inline-block bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-[16px] md:text-[18px] font-semibold py-3 px-6 md:py-4 md:px-8 rounded-full shadow-lg hover:shadow-2xl hover:scale-105 transform transition duration-300 ease-in-out"
-            >
-              目標に合わせたロードマップを作成する
-            </Link>
-          </div>
+    <Layout>
+      <div>
+        <Image src={Home} alt="RoadMap" />
+        <div className="p-4 md:p-8">
+          <h1 className="text-left font-bold text-[24px] md:text-[30px]">
+            エンジニアの「最適な学び方」を見つけよう
+          </h1>
           <p className="text-left text-[16px] md:text-[20px] mt-2 text-gray-600">
-            あなたのロードマップに合わせた勉強法を見つけよう
+            あなたの目標に合わせたロードマップを作成しよう
           </p>
-          <CategoryTabs onCategoryChange={handleCategoryChange} />{" "}
-          <div className="bg-customGray p-6 rounded-lg">
-            <SubcategoryTabs
-              subcategories={subcategories[selectedCategory]}
-              selectedSubcategory={selectedSubcategory}
-              onSelect={handleSubcategoryChange}
-            />
-            {/* 選択されたカテゴリに基づくアイテム検索結果を表示 */}
-            <RakutenItemSearch
-              category={selectedCategory}
-              subcategory={selectedSubcategory}
-            />
-            <GetQiitaArticle subcategory={selectedSubcategory} />
-          </div>
         </div>
-      </Layout>
-    </div>
+        <div className="text-center mb-8">
+          <Link
+            href="/Roadmap"
+            className="inline-block bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-[16px] md:text-[18px] font-semibold py-3 px-6 md:py-4 md:px-8 rounded-full shadow-lg hover:shadow-2xl hover:scale-105 transform transition duration-300 ease-in-out"
+          >
+            目標に合わせたロードマップを作成する
+          </Link>
+        </div>
+        <p className="text-left text-[16px] md:text-[20px] mt-2 text-gray-600">
+          あなたのロードマップに合わせた勉強法を見つけよう
+        </p>
+        <CategoryTabs onCategoryChange={handleCategoryChange} />{" "}
+        <div className="bg-customGray p-6 rounded-lg">
+          <SubcategoryTabs
+            subcategories={subcategories[selectedCategory]}
+            selectedSubcategory={selectedSubcategory}
+            onSelect={handleSubcategoryChange}
+          />
+          {/* 選択されたカテゴリに基づくアイテム検索結果を表示 */}
+          <RakutenItemSearch
+            category={selectedCategory}
+            subcategory={selectedSubcategory}
+          />
+          <GetQiitaArticle subcategory={selectedSubcategory} />
+        </div>
+      </div>
+    </Layout>
   );
 };
 export default HomePage;
