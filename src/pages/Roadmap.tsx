@@ -1,10 +1,10 @@
 import React, { useState, useRef } from "react";
 
 import Layout from "@/components/layout/Layout ";
-import Simulation from "@/components/Simulation";
+import Simulation from "@/components/rodemaps/Simulation";
 import Image from "next/image";
 import Road from "/Users/takeuchidaiki/engineer_dojo/public/images/roadmap.jpg";
-import PersonalMap from "@/components/PersonalMap";
+import PersonalMap from "@/components/rodemaps/PersonalMap";
 
 interface RoadmapData {
   steps: number;
