@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useRef } from "react";
 
 import Layout from "@/components/layout/Layout ";
 import Simulation from "@/components/Simulation";
@@ -14,6 +13,9 @@ interface RoadmapData {
 
 const RoadMap: React.FC = () => {
   const [roadmapData, setRoadmapData] = useState<RoadmapData | null>(null);
+
+  // PersonalMapセクションを参照するref
+  const personalMapRef = useRef<HTMLDivElement | null>(null);
 
   // Simulationから呼ばれる関数
   const handleGenerateRoadmap = async (formData: {
@@ -34,10 +36,19 @@ const RoadMap: React.FC = () => {
 
       const data = await response.json();
       setRoadmapData(data); // 結果を保存
+
+      // PersonalMapセクションにスクロール
+      if (personalMapRef.current) {
+        window.scrollTo({
+          top: personalMapRef.current.offsetTop, // 要素のトップ位置
+          behavior: "smooth", // スムーズスクロール
+        });
+      }
     } catch (error) {
       console.error("Error generating roadmap:", error);
     }
   };
+
   return (
     <div>
       <Layout>
@@ -52,11 +63,18 @@ const RoadMap: React.FC = () => {
               あなたの学び方に合わせた学習方法を見つけよう
             </p>
           </div>
+
+          {/* Simulationコンポーネント */}
           <Simulation onGenerateRoadmap={handleGenerateRoadmap} />
-          <PersonalMap roadmapData={roadmapData} />
+
+          {/* PersonalMapセクション */}
+          <div ref={personalMapRef}>
+            <PersonalMap roadmapData={roadmapData} />
+          </div>
         </div>
       </Layout>
     </div>
   );
 };
+
 export default RoadMap;

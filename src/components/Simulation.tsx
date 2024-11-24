@@ -35,7 +35,7 @@ const Simulation: React.FC<SimulationProps> = ({ onGenerateRoadmap }) => {
   return (
     <div className="w-full p-8 rounded-lg shadow-md">
       <form className="space-y-6" onSubmit={handleSubmit}>
-        <div className="bg-white p-6 rounded-lg shadow-sm mt-5">
+        <div className="bg-white p-6 rounded-lg shadow-sm">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">
             ロードマップに必要な情報を入力してください
           </h2>
