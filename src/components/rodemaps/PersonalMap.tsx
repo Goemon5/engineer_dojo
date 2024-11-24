@@ -17,7 +17,7 @@ interface PersonalMapProps {
 
 const PersonalMap: React.FC<PersonalMapProps> = ({ roadmapData }) => {
   if (!roadmapData) {
-    return <p>ロードマップを生成してください。</p>;
+    return null;
   }
   return (
     <div className="w-full mx-auto px-[30px] mt-[30px]">
