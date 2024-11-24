@@ -53,7 +53,7 @@ const Simulation: React.FC<SimulationProps> = ({ onGenerateRoadmap }) => {
           >
             <option value="">選択してください</option>
             <option value="1">学生</option>
-            <option value="2">社会人</option>
+            <option value="2">社会人（未設定）</option>
           </select>
 
           <label className="block text-gray-700 font-medium mb-2">
@@ -68,9 +68,7 @@ const Simulation: React.FC<SimulationProps> = ({ onGenerateRoadmap }) => {
             <option value="">選択してください</option>
             <option value="1">フロントエンドエンジニア</option>
             <option value="2">バックエンドエンジニア</option>
-            <option value="3">Webエンジニア</option>
-            <option value="4">インフラエンジニア</option>
-            <option value="5">セキュリティエンジニア</option>
+            <option value="3">Webエンジニア（未設定）</option>
           </select>
 
           <label className="block text-gray-700 font-medium mb-2">
