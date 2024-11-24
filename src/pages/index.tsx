@@ -1,9 +1,9 @@
 import Layout from "@/components/layout/Layout ";
 import styles from "../styles/pages/index.module.css";
-import CategoryTabs from "@/components/CategoryTabs";
-import RakutenItemSearch from "@/components/RakutenItemSearch";
-import SubcategoryTabs from "@/components/SubcategoryTabs";
-import GetQiitaArticle from "@/components/GetQiitaArticle";
+import CategoryTabs from "@/components/category-tabs/CategoryTabs";
+import RakutenItemSearch from "@/components/get-items/RakutenItemSearch";
+import SubcategoryTabs from "@/components/category-tabs/SubcategoryTabs";
+import GetQiitaArticle from "@/components/get-items/GetQiitaArticle";
 import React, { useState } from "react";
 import Link from "next/link";
 
@@ -45,27 +45,33 @@ const HomePage: React.FC = () => {
     <div>
       <Layout>
         <div>
+          {/* 画像部分 */}
           <img
-            src="/images/仮表紙.jpg"
-            className="w-full h-auto object-cover"
+            src="/images/表紙.png"
+            className="w-full h-auto object-cover md:h-[400px]"
+            alt="表紙"
           />
-          <div className="p-[20px]">
-            <h1 className="text-left font-bold text-[30px] ml-3px">
-              エンジニアの「学ぶ手段」を見つけよう
+          {/* テキスト部分 */}
+          <div className="p-4 md:p-8">
+            <h1 className="text-left font-bold text-[24px] md:text-[30px]">
+              エンジニアの「最適な学び方」を見つけよう
             </h1>
-            <p className="text-left text-[20px] mt-8px color: #6a6f73;">
-              あなたの学び方に合わせた学習方法を見つけよう
+            <p className="text-left text-[16px] md:text-[20px] mt-2 text-gray-600">
+              あなたの目標に合わせたロードマップを作成しよう
             </p>
           </div>
-          {/* デザインを適用したLink */}
-          <div className="text-center mt-6">
+          {/* リンクボタン */}
+          <div className="text-center mb-8">
             <Link
               href="/Roadmap"
-              className="inline-block bg-blue-500 text-white text-[18px] font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-blue-600 transition duration-300"
+              className="inline-block bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-[16px] md:text-[18px] font-semibold py-3 px-6 md:py-4 md:px-8 rounded-full shadow-lg hover:shadow-2xl hover:scale-105 transform transition duration-300 ease-in-out"
             >
               目標に合わせたロードマップを作成する
             </Link>
           </div>
+          <p className="text-left text-[16px] md:text-[20px] mt-2 text-gray-600">
+            あなたのロードマップに合わせた勉強法を見つけよう
+          </p>
           <CategoryTabs onCategoryChange={handleCategoryChange} />{" "}
           <div className="bg-customGray p-6 rounded-lg">
             <SubcategoryTabs

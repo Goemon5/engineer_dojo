@@ -13,9 +13,9 @@ function Footer({}: Props) {
           © 2024 Example Inc. All Rights Reserved.
         </a>
         <ul className="flex flex-wrap items-center mb-6 text-sm font-normal sm:mb-0 dark:text-gray-400">
-          <li>サービスについて</li>
+          <li>サービスについて(未設定)</li>
           <li></li>
-          <li>お問い合わせ</li>
+          <li>お問い合わせ(未設定)</li>
         </ul>
       </div>
     </div>
