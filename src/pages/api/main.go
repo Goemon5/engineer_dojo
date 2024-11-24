@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
-	"strings"
+
 	"github.com/joho/godotenv"
 )
 
@@ -31,9 +31,18 @@ type UserDetail struct {
 }
 
 // RoadmapResponse はレスポンスとして返すデータ
+
+
+type RoadmapStep struct {
+	Step        string `json:"step"`
+	Goal        string `json:"goal"`
+	Content     string `json:"content"`
+	Methodology string `json:"methodology"`
+}
+
 type RoadmapResponse struct {
-	Description string `json:"description"`
-	Steps       int    `json:"steps"`
+	Description []RoadmapStep `json:"description"`
+	Steps       int           `json:"steps"`
 }
 
 // RakutenResponse represents the structure of the Rakuten API response
@@ -130,41 +139,78 @@ func roadmapHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// デバッグ用ログ
+	// Debug log
 	log.Printf("Received data: %+v\n", userDetails)
 
-	// ロードマップのステップを生成
-	var description string
+	// Generate roadmap based on user details
+	response := generateRoadmap(userDetails)
 
-	if userDetails.Career == 1 && userDetails.Goal == 3 {
-		description = fmt.Sprintf(
-			"Career: %d, Position: %d, Goal: %d のロードマップです。\n" +
-				"1: 第1段階: 基礎知識の習得\n" +
-				"2: 第2段階: 実践的スキルの習得\n" +
-				"3: 第3段階: 小規模プロジェクトの経験\n" +
-				"4: 第4段階: チーム開発体験\n" +
-				"5: 第5段階: 個人成果物の作成\n",
-			userDetails.Career, userDetails.Position, userDetails.Goal)
-	} else {
-		description = fmt.Sprintf(
-			"Career: %d, Position: %d, Goal: %d のロードマップです。\n" +
-				"1: 一般的なステップ1\n" +
-				"2: 一般的なステップ2\n",
-			userDetails.Career, userDetails.Position, userDetails.Goal)
-	}
-
-	// レスポンス構造体を作成
-	response := RoadmapResponse{
-		Description: description,
-		Steps:len(strings.Split(description, "\n")) - 1, // ステップ数を計算
-	}
-
-	// レスポンスを返す
+	// Respond with JSON
 	w.Header().Set("Content-Type", "application/json")
 	if err := json.NewEncoder(w).Encode(response); err != nil {
 		http.Error(w, "Failed to encode response", http.StatusInternalServerError)
 	}
 }
+
+// Generate roadmap based on position and goal
+func generateRoadmap(userDetails UserDetail) RoadmapResponse {
+	steps := [][]RoadmapStep{
+		// Frontend roadmap
+		{
+			{"第1段階", "フロントエンドの基礎を学ぶ", "基本的なHTML、CSS、JavaScriptの習得", "オンラインコースと個人プロジェクト"},
+			{"第2段階", "インタラクティブな機能を実装できるようになる", "JavaScriptのDOM操作、イベント処理、基本的なAPIリクエスト", "書籍やハンズオンで実践"},
+			{"第3段階", "Reactを習得する", "Reactの基本コンセプトやページ遷移", "書籍と動画コース"},
+			{"第4段階", "TypeScriptとCSSフレームワークを導入", "実務レベルのコード品質とデザインスキルを向上させる", "プロジェクトを通して学習"},
+			{"第5段階", "チーム開発ツールを習得する", "Gitやコードレビューのフロー", "実務的なプロジェクト参加"},
+			{"第6段階", "実力を示すポートフォリオを完成させる", "自作アプリやポートフォリオサイトを公開", "企業にアピールするポートフォリオ制作"},
+			{"第7段階", "メガベンチャーの内定を目指す", "面接対策と企業研究", "模擬面接とコーディングテスト"},
+		},
+		// Backend roadmap
+		{
+			{"第1段階", "バックエンドの基礎を学ぶ", "Python、Java、JavaScriptなどの基本文法,データ構造とアルゴリズム（リスト、辞書、配列、ソート、探索）の習得", "オンラインコース"},
+			{"第2段階", "Webサーバーとデータベースの基礎を学ぶ", "HTTP/HTTPS、REST API、リクエストとレスポンスの仕組み,データベース（SQLの基本操作、RDBMSの概念、NoSQLの基礎）", "Webサーバー構築のチュートリアル（例: FlaskやExpressで簡単なアプリを作成）"},
+			{"第3段階", "バックエンドフレームワークを習得する", "モダンなバックエンドフレームワークを使いこなす", "実践プロジェクト（例: 認証機能付きのToDoリストアプリの作成）"},
+			{"第4段階", "開発環境とツールを習得する", "Git/GitHubの基本操作（ブランチ管理、マージ、プルリクエスト）,Dockerによるコンテナ管理", "個人プロジェクトでGitHubフローを実践,Dockerで簡単なローカル開発環境を構築"},
+			{"第5段階", "クラウドサービスとインフラを学ぶ", "AWS（EC2、S3、RDS）、GCP、AzureなどのクラウドサービスLinuxコマンドやシェルスクリプト", "AWS無料枠を利用してインスタンスを立ててみる,個人プロジェクトでクラウドホスティング（HerokuやAWS Elastic Beanstalk）"},
+			{"第6段階", "実力を示すポートフォリオを完成させる", "自作アプリやポートフォリオサイトを公開", "企業にアピールするポートフォリオ制作"},
+			{"第7段階", "メガベンチャーの内定を目指す", "面接対策と企業研究", "模擬面接とコーディングテスト"},
+		},
+	}
+
+	var roadmap RoadmapResponse
+
+	if userDetails.Position == 1 {
+		roadmap = createRoadmap(steps[0], userDetails.Goal)
+	} else if userDetails.Position == 2 {
+		roadmap = createRoadmap(steps[1], userDetails.Goal)
+	} else {
+		roadmap = RoadmapResponse{
+			Description: []RoadmapStep{
+				{"一般的なステップ1", "基本的なスキルを習得する", "基礎プログラミング技術の習得", "入門書や無料オンラインコースの活用"},
+				{"一般的なステップ2", "中級スキルを身に付ける", "中級レベルのアルゴリズムとデータ構造", "教材や実際のプロジェクト参加"},
+			},
+			Steps: 2,
+		}
+	}
+
+	return roadmap
+}
+func createRoadmap(steps []RoadmapStep, goal int) RoadmapResponse {
+	totalSteps := len(steps)
+	end := goal + 3
+	if end > totalSteps {
+		end = totalSteps
+	}
+	return RoadmapResponse{
+		Description: steps[:end],
+		Steps:       end,
+	}
+}
+
+
+
+	// レスポンスを返す
+
 
 
 func main() {
