@@ -26,36 +26,16 @@ const Simulation: React.FC<SimulationProps> = ({ onGenerateRoadmap }) => {
       [key]: parseInt(e.target.value, 10),
     });
   };
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onGenerateRoadmap(userDetails);
-
     console.log(JSON.stringify(userDetails));
-
-    // データをAPIにPOST
-    try {
-      const response = await fetch("http://localhost:8080/simulated-items", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userDetails),
-      });
-
-      if (!response.ok) {
-        throw new Error("データの送信に失敗しました");
-      }
-
-      const result = await response.json();
-    } catch (error) {
-      console.error("エラーが発生しました:", error);
-    }
+    onGenerateRoadmap(userDetails); // RoadMapの関数を呼び出すだけ
   };
 
   return (
     <div className="w-full p-8 rounded-lg shadow-md">
       <form className="space-y-6" onSubmit={handleSubmit}>
-        <div className="bg-white p-6 rounded-lg shadow-sm mt-5">
+        <div className="bg-white p-6 rounded-lg shadow-sm">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">
             ロードマップに必要な情報を入力してください
           </h2>
@@ -73,7 +53,7 @@ const Simulation: React.FC<SimulationProps> = ({ onGenerateRoadmap }) => {
           >
             <option value="">選択してください</option>
             <option value="1">学生</option>
-            <option value="2">社会人</option>
+            <option value="2">社会人（未設定）</option>
           </select>
 
           <label className="block text-gray-700 font-medium mb-2">
@@ -88,9 +68,7 @@ const Simulation: React.FC<SimulationProps> = ({ onGenerateRoadmap }) => {
             <option value="">選択してください</option>
             <option value="1">フロントエンドエンジニア</option>
             <option value="2">バックエンドエンジニア</option>
-            <option value="3">Webエンジニア</option>
-            <option value="4">インフラエンジニア</option>
-            <option value="5">セキュリティエンジニア</option>
+            <option value="3">Webエンジニア（未設定）</option>
           </select>
 
           <label className="block text-gray-700 font-medium mb-2">
