@@ -1,11 +1,10 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useRef } from "react";
 
 import Layout from "@/components/layout/Layout ";
-import Simulation from "@/components/Simulation";
+import Simulation from "@/components/rodemaps/Simulation";
 import Image from "next/image";
 import Road from "/Users/takeuchidaiki/engineer_dojo/public/images/roadmap.jpg";
-import PersonalMap from "@/components/PersonalMap";
+import PersonalMap from "@/components/rodemaps/PersonalMap";
 
 interface RoadmapData {
   steps: number;
@@ -15,6 +14,9 @@ interface RoadmapData {
 const RoadMap: React.FC = () => {
   const [roadmapData, setRoadmapData] = useState<RoadmapData | null>(null);
 
+  // PersonalMapセクションを参照するref
+  const personalMapRef = useRef<HTMLDivElement | null>(null);
+
   // Simulationから呼ばれる関数
   const handleGenerateRoadmap = async (formData: {
     career: number;
@@ -22,7 +24,7 @@ const RoadMap: React.FC = () => {
     goal: number;
   }) => {
     try {
-      const response = await fetch("/api/generate-roadmap", {
+      const response = await fetch("/api/roadmap", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -34,10 +36,19 @@ const RoadMap: React.FC = () => {
 
       const data = await response.json();
       setRoadmapData(data); // 結果を保存
+
+      // PersonalMapセクションにスクロール
+      if (personalMapRef.current) {
+        window.scrollTo({
+          top: personalMapRef.current.offsetTop, // 要素のトップ位置
+          behavior: "smooth", // スムーズスクロール
+        });
+      }
     } catch (error) {
       console.error("Error generating roadmap:", error);
     }
   };
+
   return (
     <div>
       <Layout>
@@ -52,11 +63,18 @@ const RoadMap: React.FC = () => {
               あなたの学び方に合わせた学習方法を見つけよう
             </p>
           </div>
+
+          {/* Simulationコンポーネント */}
           <Simulation onGenerateRoadmap={handleGenerateRoadmap} />
-          <PersonalMap roadmapData={roadmapData} />
+
+          {/* PersonalMapセクション */}
+          <div ref={personalMapRef}>
+            <PersonalMap roadmapData={roadmapData} />
+          </div>
         </div>
       </Layout>
     </div>
   );
 };
+
 export default RoadMap;
